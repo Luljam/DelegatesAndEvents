@@ -11,11 +11,16 @@ namespace DelegatesAndEvents
             // Instância de delegates como os métodos WorkPerformer
             WorkPerformerdHandler delegate1 = new WorkPerformerdHandler(WorkPerformed1);
             WorkPerformerdHandler delegate2 = new WorkPerformerdHandler(WorkPerformed2);
+            WorkPerformerdHandler delegate3 = new WorkPerformerdHandler(WorkPerformed3);
 
             //delegate1(9, Worktype.GoToMeetings);
             //delegate2(11, Worktype.GenerateReports);
+            //DoWork(delegate1);
 
-            DoWork(delegate1);
+            // Desta forma fica mais fácil fazer referência a multiplis assinantes
+            delegate1 += delegate2 + delegate3;
+            delegate1(10, Worktype.GenerateReports);
+            
 
             Console.Read();
         }
@@ -35,10 +40,16 @@ namespace DelegatesAndEvents
             Console.WriteLine("Work Performed 1 called - Hour: {0} Work: {1}", hours, worktype);
         }
 
-        // Método mensagem de Work Performed 1
+        // Método mensagem de Work Performed 2
         static void WorkPerformed2(int hours, Worktype worktype)
         {
             Console.WriteLine("Work Performed 2 called - Hour: {0} Work: {1}", hours, worktype);
+        }
+
+        // Método mensagem de Work Performed 3
+        static void WorkPerformed3(int hours, Worktype worktype)
+        {
+            Console.WriteLine("Work Performed 3 called - Hour: {0} Work: {1}", hours, worktype);
         }
     }
 
