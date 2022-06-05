@@ -3,7 +3,7 @@
 namespace DelegatesAndEvents
 {
     // declaração do Delegate
-    public delegate void WorkPerformerdHandler(int hours, Worktype worktype);
+    public delegate int WorkPerformerdHandler(int hours, Worktype worktype);
     class Program
     {
         static void Main()
@@ -19,8 +19,8 @@ namespace DelegatesAndEvents
 
             // Desta forma fica mais fácil fazer referência a multiplis assinantes
             delegate1 += delegate2 + delegate3;
-            delegate1(10, Worktype.GenerateReports);
-            
+            int finalHour = delegate1(10, Worktype.GenerateReports);
+            Console.WriteLine("Final hour: {0}", finalHour);
 
             Console.Read();
         }
@@ -35,21 +35,24 @@ namespace DelegatesAndEvents
         }
 
         // Método mensagem de Work Performed 1
-        static void WorkPerformed1(int hours, Worktype worktype)
+        static int WorkPerformed1(int hours, Worktype worktype)
         {
             Console.WriteLine("Work Performed 1 called - Hour: {0} Work: {1}", hours, worktype);
+            return hours + 1;
         }
 
         // Método mensagem de Work Performed 2
-        static void WorkPerformed2(int hours, Worktype worktype)
+        static int WorkPerformed2(int hours, Worktype worktype)
         {
             Console.WriteLine("Work Performed 2 called - Hour: {0} Work: {1}", hours, worktype);
+            return hours + 2;
         }
 
         // Método mensagem de Work Performed 3
-        static void WorkPerformed3(int hours, Worktype worktype)
+        static int WorkPerformed3(int hours, Worktype worktype)
         {
             Console.WriteLine("Work Performed 3 called - Hour: {0} Work: {1}", hours, worktype);
+            return hours + 3;
         }
     }
 
